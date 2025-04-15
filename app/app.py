@@ -22,7 +22,7 @@ class MovieGenreRecommender:
 app = Flask(__name__)
 
 # Load the trained model
-MODEL_PATH = os.path.join(os.path.dirname(__file__), '../model/movie_model.pkl')
+MODEL_PATH = os.path.join('model', 'movie_model.pkl')
 with open(MODEL_PATH, 'rb') as f:
     model = pickle.load(f)
 

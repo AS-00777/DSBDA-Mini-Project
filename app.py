@@ -6,9 +6,7 @@ from recommender import MovieGenreRecommender  # Import the class
 app = Flask(__name__)
 
 # Load the model
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'movie_model.pkl')
-print(f"Loading model from: {MODEL_PATH}")
-
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'models', 'movie_model.pkl')
 with open(MODEL_PATH, 'rb') as f:
     model = pickle.load(f)
 

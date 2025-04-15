@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request
-import pickle
 import os
+import pickle
+from flask import Flask, render_template, request
 
-# Define the MovieGenreRecommender class (must match the one used during saving)
+# Define MovieGenreRecommender class
 class MovieGenreRecommender:
     def __init__(self, df, vectorizer, kmeans):
         self.df = df
@@ -18,27 +18,33 @@ class MovieGenreRecommender:
         cluster = self.kmeans.predict(test_vec)[0]
         return self.df[self.df['cluster'] == cluster]['title'].head(n).tolist()
 
-# Initialize Flask app
+# Flask App Starts Here
 app = Flask(__name__)
 
-# Load the pickled model
+# Update the model path (you can print the absolute path for debugging)
 MODEL_PATH = os.path.join(os.path.dirname(__file__), 'movie_model.pkl')
-with open(MODEL_PATH, 'rb') as f:
-    model = pickle.load(f)
+print(f"Loading model from: {MODEL_PATH}")
 
-# Main route
+try:
+    with open(MODEL_PATH, 'rb') as f:
+        model = pickle.load(f)
+except FileNotFoundError:
+    print("Error: The model file was not found.")
+    model = None
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     recommendations = []
     if request.method == 'POST':
-        genre = request.form.get('genre', '')
-        if genre:
+        genre = request.form['genre']
+        if genre and model:
             try:
                 recommendations = model.recommend_by_cluster(genre)
             except Exception as e:
                 recommendations = [f"Error: {str(e)}"]
+        else:
+            recommendations = ["Model not loaded properly."]
     return render_template('index.html', recommendations=recommendations)
 
-# Run the app locally
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,7 +1,7 @@
 
 import os
 from flask import Flask, render_template, request
-from recommender import MovieGenreRecommender  # Import the class
+from recommender import MovieGenreRecommender
 
 app = Flask(__name__)
 import pickle

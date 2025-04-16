@@ -8,7 +8,6 @@ import pickle
 # Load the model
 MODEL_PATH = os.path.join(os.path.dirname(__file__), 'movie_model.pkl')
 print(f"Loading model from: {MODEL_PATH}")
-
 with open(MODEL_PATH, 'rb') as f:
     model = pickle.load(f)
 
@@ -27,5 +26,4 @@ def home():
     return render_template('index.html', recommendations=recommendations)
 
 if __name__ == '__main__':
-    app.run(debug=False, use_reloader=False)
-
+    app.run(debug=True)

@@ -1,3 +1,5 @@
+# recommender.py
+
 class MovieGenreRecommender:
     def __init__(self, df, vectorizer, kmeans):
         self.df = df

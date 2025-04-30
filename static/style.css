@@ -1,62 +1,83 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212;
-    color: #f0f0f0;
-    padding: 40px;
+    background-color: #0d0d0d;
+    color: #eaeaea;
     margin: 0;
+    padding: 40px 20px;
+    background-image: linear-gradient(to bottom, #111, #1a1a1a);
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 600px;
-    margin: auto;
-    background: #1e1e1e;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #1f1f1f;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    position: relative;
+    top: 0;
+    animation: fadeInTop 0.8s ease;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 25px;
-    color: #00bcd4;
+    color: #00bcd4; /* Updated color */
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-shadow: 0 1px 4px rgba(0, 188, 212, 0.4); /* Updated color */
+    letter-spacing: 1px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
 }
 
 input[type="text"] {
-    padding: 12px;
-    border: none;
+    padding: 14px;
+    border: 1px solid #333;
     border-radius: 8px;
     font-size: 16px;
-    background: #2c2c2c;
-    color: #fff;
+    background-color: #2a2a2a;
+    color: #f5f5f5;
+    transition: border 0.3s, background 0.3s;
+}
+
+input[type="text"]:focus {
+    border: 1px solid #00bcd4; /* Updated color */
+    background-color: #2e2e2e;
+    outline: none;
 }
 
 button {
-    padding: 12px;
-    background-color: #00bcd4;
+    padding: 14px;
+    background-color: #00bcd4; /* Updated color */
     border: none;
     border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
+    color: #eaeaea;
+    font-size: 17px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 button:hover {
-    background-color: #0192a4;
+    background-color: #0097a7; /* Darker shade of #00bcd4 */
 }
 
 .recommendations {
-    margin-top: 30px;
+    margin-top: 35px;
+    animation: fadeInUp 0.6s ease-in-out;
 }
 
 .recommendations h2 {
-    color: #ff9800;
+    color: #00bcd4; /* Updated color */
+    font-size: 22px;
     margin-bottom: 10px;
 }
 
@@ -66,8 +87,91 @@ button:hover {
 }
 
 .recommendations li {
-    background: #2c2c2c;
-    margin: 8px 0;
-    padding: 10px 15px;
+    background-color: #2b2b2b;
+    margin-bottom: 10px;
+    padding: 12px 16px;
     border-radius: 6px;
+    border-left: 4px solid #00bcd4; /* Updated color */
+    font-size: 15px;
+    transition: background 0.3s;
+}
+
+.recommendations li:hover {
+    background-color: #353535;
+}
+
+
+/* Animations */
+@keyframes fadeInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    font-size: 20px;
+    opacity: 0.95;
+}
+
+.background-animation span {
+    position: absolute;
+    color: #00bcd4;  /* No glow color */
+    animation: fallIcon 5s linear infinite; /* Quick fall */
+    top: -30px;
+    user-select: none;
+    transform-origin: center;
+}
+
+/* Randomize left position and animation delays for a more dynamic effect */
+.background-animation span:nth-child(1) { left: 10%; font-size: 18px; animation-delay: 0s; content: '🎬'; }
+.background-animation span:nth-child(2) { left: 25%; font-size: 22px; animation-delay: 0.5s; content: '🍿'; }
+.background-animation span:nth-child(3) { left: 40%; font-size: 20px; animation-delay: 1s; content: '🎥'; }
+.background-animation span:nth-child(4) { left: 55%; font-size: 26px; animation-delay: 1.5s; content: '🎞️'; }
+.background-animation span:nth-child(5) { left: 70%; font-size: 24px; animation-delay: 2s; content: '📽️'; }
+.background-animation span:nth-child(6) { left: 85%; font-size: 20px; animation-delay: 2.5s; content: '🎬'; }
+.background-animation span:nth-child(7) { left: 20%; font-size: 18px; animation-delay: 3s; content: '🍿'; }
+.background-animation span:nth-child(8) { left: 35%; font-size: 25px; animation-delay: 3.5s; content: '🎥'; }
+.background-animation span:nth-child(9) { left: 50%; font-size: 21px; animation-delay: 4s; content: '🎞️'; }
+.background-animation span:nth-child(10) { left: 65%; font-size: 19px; animation-delay: 4.5s; content: '📽️'; }
+.background-animation span:nth-child(11) { left: 80%; font-size: 23px; animation-delay: 5s; content: '🌟'; }
+.background-animation span:nth-child(12) { left: 10%; font-size: 22px; animation-delay: 5.5s; content: '🎭'; }
+.background-animation span:nth-child(13) { left: 20%; font-size: 20px; animation-delay: 6s; content: '🎟️'; }
+.background-animation span:nth-child(14) { left: 30%; font-size: 26px; animation-delay: 6.5s; content: '👑'; }
+
+/* Keep varying the sizes and delays for more randomness */
+@keyframes fallIcon {
+    0% {
+        transform: translateY(-120vh) scale(0.8) rotate(0deg);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) scale(1.2) rotate(720deg);
+        opacity: 0;
+    }
 }

@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="background-animation">
+        <span>🎬</span>
+        <span>🍿</span>
+        <span>🎥</span>
+        <span>🎞️</span>
+        <span>📽️</span>
+        <span>🎬</span>
+        <span>🍿</span>
+        <span>🎥</span>
+        <span>🎞️</span>
+        <span>📽️</span>
+        <span>🌟</span>
+        <span>🎭</span>
+        <span>🎟️</span>
+        <span>👑</span>
+        <span>🎬</span>
+        <span>🍿</span>
+        <span>🎥</span>
+        <span>🎞️</span>
+        <span>📽️</span>
+        <span>🌟</span>
+    </div>
+    
     <div class="container">
         <h1>🎬 Movie Genre Recommender</h1>
         <form method="post">
@@ -26,5 +49,161 @@
             </div>
         {% endif %}
     </div>
+<body>
+<style>
+    #chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 340px;
+        max-height: 500px;
+        background-color: #1e1e1e;
+        color: #f5f5f5;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        z-index: 1000;
+        cursor: grab;
+    }
+    #chatbot-header {
+        background: linear-gradient(to right, #00bcd4);
+        padding: 12px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+        cursor: move;
+        user-select: none;
+    }
+    #chatbot-messages {
+        flex: 1;
+        padding: 12px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+    #chatbot-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+    #chatbot-messages::-webkit-scrollbar-thumb {
+        background-color: #00bcd4;
+        border-radius: 3px;
+    }
+    #chatbot-input {
+        display: flex;
+        border-top: 1px solid #333;
+        background-color: #1e1e1e;
+    }
+    #chatbot-input input {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        background: #1e1e1e;
+        color: #fff;
+        font-size: 15px;
+    }
+    #chatbot-input input:focus {
+        outline: none;
+    }
+    #chatbot-input button {
+        background: #00bcd4;
+        color: #fff;
+        border: none;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    #chatbot-input button:hover {
+        background: #00bcd4;
+    }
+    .chatbot-message {
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+    .chatbot-message strong {
+        color: #1e1e1e;
+    }
+    </style>
+    
+    <div id="chatbot-container">
+        <div id="chatbot-header"><b>🤖MovieBot</b></div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input">
+            <input type="text" id="user-input" placeholder="Ask for a movie genre..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
+    <script>
+    // Message handling
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    function appendMessage(sender, message) {
+        const msg = document.createElement('div');
+        msg.classList.add('chatbot-message');
+        msg.innerHTML = '<strong>' + sender + ':</strong> ' + message;
+        chatbotMessages.appendChild(msg);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    function sendMessage() {
+    const userInput = document.getElementById('user-input');
+    const text = userInput.value.trim();
+    if (text === '') return;
+    appendMessage('You', text);
+    userInput.value = '';
+
+    setTimeout(() => {
+        const lowerText = text.toLowerCase();
+        let reply = "Sorry, I didn't understand that. Try asking for a genre like 'action', 'comedy', or 'drama'.";
+
+        if (lowerText.includes('action')) {
+            reply = "🎬 Top Action Movies:\n• Mad Max: Fury Road\n• John Wick\n• Gladiator\n• The Dark Knight\n• Die Hard\n• Extraction";
+        } else if (lowerText.includes('comedy')) {
+            reply = "😂 Best Comedies:\n• Superbad\n• The Hangover\n• Step Brothers\n• The Grand Budapest Hotel\n• Dumb and Dumber\n• Groundhog Day";
+        } else if (lowerText.includes('drama')) {
+            reply = "🎭 Must-Watch Dramas:\n• The Shawshank Redemption\n• Forrest Gump\n• Fight Club\n• A Beautiful Mind\n• The Green Mile\n• Parasite";
+        } else if (lowerText.includes('sci-fi') || lowerText.includes('science')) {
+            reply = "🚀 Sci-Fi Picks:\n• Interstellar\n• Inception\n• Blade Runner 2049\n• The Matrix\n• Arrival\n• Dune (2021)";
+        } else if (lowerText.includes('romance')) {
+            reply = "💕 Romantic Favorites:\n• The Notebook\n• La La Land\n• Pride & Prejudice\n• Titanic\n• Me Before You\n• A Walk to Remember";
+        } else if (lowerText.includes('horror')) {
+            reply = "😱 Chilling Horror Movies:\n• The Conjuring\n• Get Out\n• Hereditary\n• It\n• A Quiet Place\n• The Babadook";
+        } else if (lowerText.includes('recommend')) {
+            reply = "Sure! Just tell me what genre you want recommendations for: action, comedy, drama, horror, sci-fi, or romance.";
+        }
+
+        appendMessage('MovieBot', reply.replace(/\n/g, '<br>'));
+    }, 700);
+}
+    
+    // Dragging functionality
+    const chatbot = document.getElementById("chatbot-container");
+    const header = document.getElementById("chatbot-header");
+    
+    let isDragging = false, offsetX, offsetY;
+    
+    header.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        const rect = chatbot.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        chatbot.style.transition = "none";
+    });
+    
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        chatbot.style.left = `${e.clientX - offsetX}px`;
+        chatbot.style.top = `${e.clientY - offsetY}px`;
+        chatbot.style.right = "auto";
+        chatbot.style.bottom = "auto";
+        chatbot.style.position = "fixed";
+    });
+    
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+    });
+    </script>
+    
 </body>
 </html>

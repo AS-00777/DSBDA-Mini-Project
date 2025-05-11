@@ -67,4 +67,5 @@ A detailed **Jupyter Notebook** (`MovieGenreRecommender.ipynb`) is included that
    ```
 3. Open `index.html` in a web browser.
 
-##Thank You!!!
+
+## Thank You!!!
